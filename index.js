@@ -1,6 +1,8 @@
 var io = require('socket.io')(process.env.PORT || 3000);
 var shortid = require('shortid');
 
+console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+
 var playerList = {};
 
 console.log('Starting the server');
