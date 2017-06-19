@@ -25,14 +25,17 @@ io.on('connection', function (socket) {
     });
 
     socket.on('enemy', function (data) {
+        data.s = sessionId;
         socket.broadcast.emit('enemy', data);
     });
 
     socket.on('move', function (data) {
+        data.s = sessionId;
         socket.broadcast.emit('move', data);
     });
 
     socket.on('mothership', function (data) {
+        data.s = sessionId;
         energyCount += data.q;
         socket.broadcast.emit('mothership', data);
     });
