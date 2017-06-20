@@ -20,6 +20,8 @@ io.on('connection', function (socket) {
     playerList[sessionId] = true;
 
     socket.on('gameover', function (data) {
+        console.log("Gameover session");
+        
         playerList = {};
         energyCount = 0;
     });
