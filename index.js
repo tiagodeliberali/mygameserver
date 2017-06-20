@@ -21,9 +21,6 @@ io.on('connection', function (socket) {
 
     socket.on('gameover', function (data) {
         console.log("Gameover session");
-        
-        playerList = {};
-        energyCount = 0;
     });
 
     socket.on('enemy', function (data) {
