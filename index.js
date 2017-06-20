@@ -25,18 +25,18 @@ io.on('connection', function (socket) {
     });
 
     socket.on('enemy', function (data) {
-        data.s = sessionId;
+        data.SessionId = sessionId;
         socket.broadcast.emit('enemy', data);
     });
 
     socket.on('move', function (data) {
-        data.s = sessionId;
+        data.SessionId = sessionId;
         socket.broadcast.emit('move', data);
     });
 
     socket.on('mothership', function (data) {
-        data.s = sessionId;
-        energyCount += data.q;
+        data.SessionId = sessionId;
+        energyCount += data.EnergyCount;
         socket.broadcast.emit('mothership', data);
     });
 
@@ -44,7 +44,7 @@ io.on('connection', function (socket) {
         console.log('Disconnectiong client');
         delete playerList[sessionId];
         socket.broadcast.emit('unspawn', {
-            s: sessionId
+            SessionId: sessionId
         });
 
         if (Object.keys(playerList).length == 0) {
@@ -58,13 +58,13 @@ function createSession(socket, sessionId) {
     console.log('client connected, sessionid: ' + sessionId);
 
     socket.emit('session', {
-        s: sessionId,
-        q: energyCount
+        SessionId: sessionId,
+        EnergyCount: energyCount
     });
 
     for (var i in playerList) {
         socket.emit('spawn', {
-            s: i
+            SessionId: i
         });
     }
 }
@@ -73,6 +73,6 @@ function broadcastSession(socket, sessionId) {
     console.log('client connected, broadcasting spawn');
 
     socket.broadcast.emit('spawn', {
-        s: sessionId
+        SessionId: sessionId
     });
 }
